@@ -14,7 +14,11 @@ app.use((req, res, next) => {
     let log = `${now}: ${req.method} ${req.url}`;
 
     console.log(log);
-    fs.appendFile('server.log', log + '\n');
+    fs.appendFile('server.log', log + '\n', (err) => { 
+        if (err) {
+            console.log("Can't open log file to append");
+        }
+     });
     next();
 });
 
